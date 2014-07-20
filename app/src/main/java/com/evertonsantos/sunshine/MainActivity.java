@@ -1,20 +1,9 @@
 package com.evertonsantos.sunshine;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new ForecastFragment())
                     .commit();
         }
     }
@@ -50,47 +39,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        private ArrayAdapter<String> mForecastAdapter;
-        private ListView mForecasListView;
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            String[] foreacastArray  = {
-                    "Today - Sunny - 26/22",
-                    "Tomorrow - Cloudy - 23/21",
-                    "After tomorrow - Sunny - 26/22",
-                    "After after tomorrow - Sunny - 26/22",
-                    "Wed - Sunny - 26/22",
-                    "Tru - Sunny - 26/22",
-                    "Fri - Sunny - 26/22"
-            };
-
-            ArrayList<String> weekForecast = new ArrayList<String>(Arrays.asList(foreacastArray));
-
-
-            mForecastAdapter = new ArrayAdapter<String>(
-                    getActivity(),
-                    R.layout.list_item_forecast,
-                    R.id.list_item_forecast_textview,
-                    weekForecast);
-
-            mForecasListView = (ListView) rootView.findViewById(R.id.listview_forecast);
-
-            mForecasListView.setAdapter(mForecastAdapter);
-
-
-            return rootView;
-        }
-    }
 }
